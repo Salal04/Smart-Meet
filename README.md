@@ -29,7 +29,7 @@
 
 Zoom, Meet, and Teams can tell you **who joined**. None of them can tell you **who was actually paying attention**.
 
-**SmartMeet** layers real-time **computer-vision engagement analysis** on top of standard video conferencing — face presence, gaze direction, and head pose are tracked live, and every session ends with an automated report scoring each participant's attentiveness.
+**SmartMeet** layers real-time **Deep-learning and computer-vision engagement analysis** on top of standard video conferencing — face presence, gaze direction, and head pose are tracked live, and every session ends with an automated report scoring each participant's attentiveness.
 
 Built as a Final Year Design Project at the **Department of Software Engineering, University of the Punjab (PUCIT)**.
 
@@ -61,6 +61,7 @@ Built as a Final Year Design Project at the **Department of Software Engineering
 - **Post-meeting deep analysis** (Flask service)
   - Posture + gaze detection
   - 16 frames sampled per 10-sec window
+  - used Deep-learning For Deep facial expressions Analysis 
   - `Highly Engaged` · `Engaged` · `Not Engaged`
 - 📄 Per-participant & session engagement reports
 - 📝 AI meeting notes from audio/transcript
@@ -68,6 +69,11 @@ Built as a Final Year Design Project at the **Department of Software Engineering
 </td>
 </tr>
 </table>
+## Related Research Project
+
+This project is based on the deep-learning research work developed in **DG-SVFAP**.
+
+🔗 [DG-SVFAP – Deep Learning Video Engagement Analysis](https://github.com/Salal04/DG-SVFAP)
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
@@ -99,7 +105,7 @@ flowchart LR
 | **Real-time Communication** | WebRTC |
 | **Authentication** | JWT / NextAuth / Supabase Auth |
 | **Computer Vision (real-time)** | Python, OpenCV, MediaPipe |
-| **Computer Vision (post-processing)** | Flask, OpenCV, MediaPipe |
+| **Deep learning (post-processing)** | Flask, DG-SPVAF, MediaPipe |
 | **Deployment** | Vercel |
 | **Version Control / PM** | GitHub, Jira |
 
@@ -153,9 +159,9 @@ PORT=5000
 </details>
 
 <details open>
-<summary><b>5️⃣ AI / Computer Vision service (Flask)</b></summary>
+<summary><b>5️⃣ Deep Learning service (Flask)</b></summary>
 
-The CV engine lives in its own service and is kept isolated from the Node/Next stack to avoid dependency conflicts.
+This engine lives in its own service and is kept isolated from the Node/Next stack to avoid dependency conflicts.
 
 ```bash
 cd ai-service
@@ -197,19 +203,6 @@ Or use the live deployment 👉 **[smartmeet-platform.vercel.app](https://smartm
 </details>
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
-
-## 📁 Repository Structure & Branching
-
-**Main branches**
-- `master` — production-ready code
-- `develop` — stable development branch
-
-**Feature & supporting branches**
-- `feature/ui` · `cv` · `Smart-Meet-Server-only` · `Backend` · `server` · `integration_b`
-
-All features are developed in dedicated branches and merged into `develop` → `master` after integration and testing.
-
-
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.gif" width="100%">
 
