@@ -1,0 +1,110 @@
+generator postgresqlClient {
+  provider = "prisma-client-js"
+}
+
+datasource PostSQLDB {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id                 Int       @id @default(autoincrement())
+  name               String
+  email              String    @unique
+  password           String
+  ImagePath          String?
+  codeVerified       Boolean?
+  createdAt          DateTime  @default(now())
+  active             Boolean   @default(false)
+  code               String?
+  codeActivationTime DateTime?
+  role               String?   @default("user")
+  accountType        String?   @default("Basic")
+
+  organization        Organization[]
+  member              OrganizationMember[]
+  meetings            Meeting[]
+  meetingParticipants MeetingParticipant[]
+}
+
+model Organization {
+  id                    Int      @id @default(autoincrement())
+  name                  String
+  description           String
+  ImagePath             String?
+  createAt              DateTime @default(now())
+  organizationCode      String   @unique
+  domainName            String?
+  totalParticipants     Int      @default(1)
+  domainRestrictionFlag Boolean  @default(false)
+
+  ownerId Int
+  owner   Users @relation(fields: [ownerId], references: [id])
+
+  meeting Meeting[]
+  members OrganizationMember[]
+
+  @@index([ownerId])
+}
+
+model OrganizationMember {
+  id Int @id @default(autoincrement())
+
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
+
+  joinedAt DateTime @default(now())
+
+  @@unique([organizationId, userId])
+  @@index([userId, organizationId])
+  @@index([userId])
+  @@index([organizationId])
+}
+
+model Meeting {
+  id               Int          @id @default(autoincrement())
+  name             String
+  description      String?
+  organizationId   Int
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  daily            Boolean      @default(false)
+  weekly           Boolean      @default(false)
+  startTime        DateTime
+  EnableEngagement Boolean      @default(true)
+  Engagment        Int          @default(0)
+  meetingDuration  Int          @default(30)
+  meetingLink      String       @default("")
+
+  hostId Int
+  host   Users @relation(fields: [hostId], references: [id])
+
+  participants MeetingParticipant[]
+
+  @@index([organizationId])
+  @@index([hostId])
+}
+
+model MeetingParticipant {
+  id Int @id @default(autoincrement())
+
+  meetingId Int
+  meeting   Meeting @relation(fields: [meetingId], references: [id])
+
+  userId Int
+  user   Users @relation(fields: [userId], references: [id])
+
+  totalActiveSeconds Int   @default(0)
+  avgAttention       Float @default(0)
+  avgGaze            Float @default(0)
+  avgFace            Float @default(0)
+
+  firstJoinTime DateTime?
+  lastLeaveTime DateTime?
+
+  @@unique([meetingId, userId])
+  @@index([meetingId])
+  @@index([userId])
+}

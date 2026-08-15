@@ -1,0 +1,93 @@
+# =========================
+#         TYPES
+# =========================
+
+type Users {
+  id: Int!
+  name: String!
+  email: String!
+  password: String!
+  ImagePath: String
+  active: Boolean!
+  code: String
+  codeActivationTime: String
+  accountType: String
+  role: String
+  codeVerified: Boolean
+  createdAt: String
+  organization: [Organization!]
+  member: [OrganizationMember!]
+  ownedOrganizations: [Organization!]
+}
+
+
+type Organization {
+  id: Int!
+  name: String!
+  description: String!
+  ImagePath: String
+  createAt: String!
+  organizationCode: String
+  domainName: String
+  domainRestrictionFlag: Boolean!
+  ownerId: Int
+  totalParticipants:Int
+  owner: Users
+  meeting(time: String  = "0", limit:Int = 0): [Meeting!]
+  members: [OrganizationMember!]
+}
+
+type OrganizationMember {
+  id: Int!
+  organizationId: Int!
+  userId: Int!
+  joinedAt: String!
+  user: Users!
+  organization: Organization!
+}
+
+type Meeting {
+  id: Int!
+  name: String!
+  description: String
+  organizationId: Int!
+  daily: Boolean!
+  weekly: Boolean!
+  startTime: String!
+  hostId: Int!
+  EnableEngagement:Boolean!
+  Engagment:Int!
+  meetingDuration:Int!
+  meetingLink:String!
+  organization: Organization!
+  host: Users!
+
+  participants: [MeetingParticipant!]
+}
+
+type MeetingParticipant {
+  id: Int!
+  meetingId: Int!
+  userId: Int!
+
+  totalActiveSeconds: Int!
+  avgAttention: Float!
+  avgGaze: Float!
+  avgFace: Float!
+
+  firstJoinTime: String
+  lastLeaveTime: String
+
+  user: Users!
+}
+
+
+# =========================
+#        QUERIES (GET)
+# =========================
+
+type Query {
+  getUserbyId: Users
+  getOrganizationbyId(id:Int!):Organization
+  getMeetingById(id:Int!):Meeting
+}
