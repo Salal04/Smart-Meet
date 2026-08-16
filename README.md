@@ -69,7 +69,8 @@ Built as a Final Year Design Project at the **Department of Software Engineering
 </td>
 </tr>
 </table>
-## Related Research Project
+
+### Related Research Project
 
 This project is based on the deep-learning research work developed in **DG-SVFAP**.
 
