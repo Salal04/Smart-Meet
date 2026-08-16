@@ -240,8 +240,6 @@ Developed by **Team SmartMeet**, Department of Software Engineering, FCIT — Un
 
 - 🌐 Live App: [smartmeet-platform.vercel.app](https://smartmeet-platform.vercel.app/)
 - 🎬 Demo Video: [Watch here](https://drive.google.com/file/d/1vJCgurEKFQtbW6a0b-jdf42E78mo7WCF/view)
-- 📋 Jira Board: [pucit-smartmeet.atlassian.net](https://pucit-smartmeet.atlassian.net/jira)
-- 💻 Source: [github.com/laiba-ajmal-12/SmartMeetFYP](https://github.com/laiba-ajmal-12/SmartMeetFYP)
 
 ## 📄 License
 
